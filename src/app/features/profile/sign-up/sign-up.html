@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="content col-12 col-md-8 col-lg-6 py-2">
+    <div class="row social-media-icons mx-auto  mt-5">
+      <div class="col">
+        <div class="social-media-icon mx-auto">
+          <svg
+            (click)="signInWithGoogle()"
+            width="48"
+            height="48"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M45.12 24.5C45.12 22.94 44.98 21.44 44.72 20H24V28.51H35.84C35.33 31.26 33.78 33.59 31.45 35.15V40.67H38.56C42.72 36.84 45.12 31.2 45.12 24.5V24.5Z"
+              fill="#4285F4"
+            />
+            <path
+              d="M24 46C29.94 46 34.92 44.03 38.56 40.67L31.45 35.15C29.48 36.47 26.96 37.25 24 37.25C18.27 37.25 13.42 33.38 11.69 28.18H4.33997V33.88C7.95997 41.07 15.4 46 24 46Z"
+              fill="#34A853"
+            />
+            <path
+              d="M11.69 28.18C11.25 26.86 11 25.45 11 24C11 22.55 11.25 21.14 11.69 19.82V14.12H4.34C2.8 17.1857 1.99864 20.5692 2 24C2 27.55 2.85 30.91 4.34 33.88L11.69 28.18V28.18Z"
+              fill="#FBBC05"
+            />
+            <path
+              d="M24 10.75C27.23 10.75 30.13 11.86 32.41 14.04L38.72 7.73C34.91 4.18 29.93 2 24 2C15.4 2 7.95997 6.93 4.33997 14.12L11.69 19.82C13.42 14.62 18.27 10.75 24 10.75Z"
+              fill="#EA4335"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="col">
+        <div class="social-media-icon mx-auto" (click)="signInWithMicrosoft()">
+          <img
+            src="/images/Microsoft_logo.svg.png"
+            alt=""
+            width="48"
+            height="48"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="social-media-icon mx-auto">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M40.8983 40.8992H33.7862V29.761C33.7862 27.105 33.7388 23.6859 30.0872 23.6859C26.3829 23.6859 25.8162 26.5797 25.8162 29.5676V40.8985H18.7041V17.9938H25.5317V21.124H25.6273C26.3106 19.9556 27.2979 18.9945 28.4842 18.343C29.6705 17.6914 31.0113 17.3739 32.3638 17.4241C39.5722 17.4241 40.9013 22.1656 40.9013 28.3341L40.8983 40.8992ZM10.6793 14.8629C9.86296 14.863 9.06494 14.6211 8.38614 14.1677C7.70733 13.7143 7.17826 13.0698 6.86574 12.3157C6.55322 11.5615 6.47132 10.7317 6.63043 9.93101C6.78954 9.13035 7.1825 8.39485 7.7596 7.81752C8.3367 7.2402 9.07204 6.84697 9.87262 6.68757C10.6732 6.52817 11.503 6.60976 12.2573 6.92201C13.0115 7.23427 13.6561 7.76317 14.1098 8.44183C14.5634 9.12049 14.8056 9.91844 14.8058 10.7348C14.8059 11.2768 14.6992 11.8135 14.4919 12.3143C14.2845 12.8151 13.9806 13.2701 13.5975 13.6535C13.2143 14.0368 12.7593 14.3409 12.2586 14.5484C11.7579 14.7559 11.2212 14.8628 10.6793 14.8629ZM14.2353 40.8992H7.11579V17.9938H14.2353V40.8992ZM44.444 0.00327032H3.54198C2.61362 -0.00720657 1.71904 0.351327 1.05488 1.00008C0.390724 1.64884 0.0113301 2.53475 0 3.46313V44.5362C0.0109423 45.465 0.390114 46.3515 1.05425 47.0009C1.71838 47.6504 2.61316 48.0096 3.54198 47.9997H44.444C45.3746 48.0114 46.2719 47.6532 46.9387 47.0038C47.6054 46.3544 47.9871 45.4668 48 44.5362V3.46017C47.9867 2.52994 47.6048 1.64303 46.938 0.994288C46.2712 0.345546 45.3742 -0.0119629 44.444 0.000305644"
+              fill="#0A66C2"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="row mx-auto mt-5 login-alt-prompt-text">
+      <div class="col mx-auto hr-line"></div>
+      <h4 class="col-2 mx-auto">OR</h4>
+      <div class="col mx-auto hr-line"></div>
+    </div>
+    <form [formGroup]="credentialsForm" class="px-3">
+      <app-text-input
+        [formGroup]="credentialsForm"
+        [control]="'email'"
+        [label]="'Email'"
+      />
+      <app-text-input
+        [formGroup]="credentialsForm"
+        [control]="'password'"
+        [label]="'Password'"
+      />
+      <div class="d-flex justify-content-center align-items-center">
+        <button class="btn btn-primary">Sign Up</button>
+      </div>
+    </form>
+        <p class="text-start my-3 ms-3">
+      Already have an account? <a [routerLink]="'/auth'">Login</a>
+    </p>
+  </div>
+</div>
