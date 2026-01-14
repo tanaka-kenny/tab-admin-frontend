@@ -1,0 +1,15 @@
+<div class="mb-3" [formGroup]="formGroup()" >
+  <label class="form-label">
+    {{ label() }}
+    @if(isRequired()) {
+    <span>*</span>
+    }
+  </label>
+  <select [formControlName]="control()" class="form-control">
+    <option selected></option>
+    @for (option of options(); track $index) {
+      <option [value]="option.key">{{ option.value }}</option>
+    }
+  </select>
+  <app-input-errors [control]="formGroup().controls[control()]" />
+</div>

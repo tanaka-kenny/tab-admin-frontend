@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: "Commissioner";
+  src: url("/fonts/Commissioner-VariableFont_FLAR.ttf");
+}
+
+$commissioner_font: "Commissioner";
+
+$primary_color: #123753;
+
+body {
+  font-family: $commissioner_font;
+}
+
+input.form-control {
+  border: none;
+  border-bottom: 1px solid $primary_color !important;
+  width: 100%;
+  border-radius: 0;
+}
+
+label.form-label {
+  display: block;
+  color: #000;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+select.form-control {
+  border: none;
+  border-bottom: 1px solid $primary_color !important;
+  width: 100%;
+  border-radius: 0;
+}
+
+.btn {
+  border-radius: 0.1875rem;
+  width: 155px;
+  height: 55px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  &:disabled {
+    background: #d3d3d3;
+    border: none;
+  }
+
+  &.btn-secondary {
+    border: 1px solid $primary_color;
+    background: #fff;
+    color: #123753;
+  }
+
+  &.btn-primary {
+    background: $primary_color;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    color: #fff;
+  }
+}
+
+h2 {
+  color: #1a2a40;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
