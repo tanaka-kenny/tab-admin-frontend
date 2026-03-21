@@ -1,17 +1,37 @@
-<div class="container d-flex flex-column justify-content-center align-items-center my-5">
-  <form [formGroup]="credentialsForm" class="col-12 col-md-6 col-lg-4">
-    <h2>Forgot your password?</h2>
-    <app-text-input
-      [formGroup]="credentialsForm"
-      [control]="'email'"
-      [label]="'Email'"
-    />
-    <div class="d-flex justify-content-center align-items-center">
-      <button class="btn btn-secondary">Cancel</button>
-      <button class="btn btn-primary ms-2">Next</button>
+<div class="login-wrapper">
+  <!-- Left branding panel -->
+  <div class="branding-panel">
+    <div class="branding-content">
+      <div class="brand-logo">TAB</div>
+      <h1 class="brand-tagline">Reset your password</h1>
+      <p class="brand-sub">We'll send a link to your email so you can get back in quickly.</p>
     </div>
-  </form>
-      <p class="text-end my-3 me-3">
-      <a [routerLink]="'/auth'">Back to login</a>
-    </p>
+    <div class="branding-circles">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="form-panel">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Forgot your password?</h2>
+        <p>Enter your email and we'll send you a reset link</p>
+      </div>
+
+      <form [formGroup]="credentialsForm">
+        <app-text-input [formGroup]="credentialsForm" [control]="'email'" [label]="'Email'" />
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary action-btn" [routerLink]="'/auth'">Cancel</button>
+          <button type="submit" class="btn btn-primary action-btn">Send link</button>
+        </div>
+      </form>
+
+      <p class="back-link">
+        <a [routerLink]="'/auth'">&#8592; Back to sign in</a>
+      </p>
+    </div>
+  </div>
 </div>

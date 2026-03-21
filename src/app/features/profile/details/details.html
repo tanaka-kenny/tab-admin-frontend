@@ -1,60 +1,52 @@
-<div class="container my-5">
-  <form [formGroup]="detailsForm" class="mx-auto col-12 col-md-6 col-lg-4">
-    <h2>Personal Details</h2>
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'firstName'"
-      [label]="'First Name(s)'"
-    />
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'lastName'"
-      [label]="'Last Name'"
-    />
-
-    <h2>Company Details</h2>
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'companyName'"
-      [label]="'Company Name'"
-    />
-
-    <h2>Address Details</h2>
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'street1'"
-      [label]="'Street Address'"
-    />
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'street2'"
-      [label]="'Street 2'"
-    />
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'suburb'"
-      [label]="'Suburb'"
-    />
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'city'"
-      [label]="'City'"
-    />
-    <app-select-input
-      [formGroup]="detailsForm"
-      [control]="'province'"
-      [label]="'Province'"
-      [options]="provinces"
-    />
-    <app-text-input
-      [formGroup]="detailsForm"
-      [control]="'postalCode'"
-      [label]="'Postal Code'"
-    />
-
-    <div class="d-flex justify-content-center align-items-center">
-      <button class="btn btn-secondary">Back</button>
-      <button class="btn btn-primary ms-2">Next</button>
+<div class="login-wrapper">
+  <!-- Left branding panel -->
+  <div class="branding-panel">
+    <div class="branding-content">
+      <div class="brand-logo">TAB</div>
+      <h1 class="brand-tagline">Almost there</h1>
+      <p class="brand-sub">Fill in your profile details so we can personalise your experience.</p>
     </div>
-  </form>
+    <div class="branding-circles">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="form-panel">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Your details</h2>
+        <p>Tell us a bit about yourself</p>
+      </div>
+
+      <form [formGroup]="detailsForm">
+
+        <div class="form-section-label">Personal</div>
+        <div class="form-row-grid">
+          <app-text-input [formGroup]="detailsForm" [control]="'firstName'" [label]="'First Name(s)'" />
+          <app-text-input [formGroup]="detailsForm" [control]="'lastName'" [label]="'Last Name'" />
+        </div>
+
+        <div class="form-section-label">Company</div>
+        <app-text-input [formGroup]="detailsForm" [control]="'companyName'" [label]="'Company Name'" />
+
+        <div class="form-section-label">Address</div>
+        <app-text-input [formGroup]="detailsForm" [control]="'street1'" [label]="'Street Address'" />
+        <app-text-input [formGroup]="detailsForm" [control]="'street2'" [label]="'Street 2'" />
+        <app-text-input [formGroup]="detailsForm" [control]="'suburb'" [label]="'Suburb'" />
+        <div class="form-row-grid">
+          <app-text-input [formGroup]="detailsForm" [control]="'city'" [label]="'City'" />
+          <app-text-input [formGroup]="detailsForm" [control]="'postalCode'" [label]="'Postal Code'" />
+        </div>
+        <app-select-input [formGroup]="detailsForm" [control]="'province'" [label]="'Province'" [options]="provinces" />
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary action-btn">Back</button>
+          <button type="submit" class="btn btn-primary action-btn">Next</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>
