@@ -1,0 +1,17 @@
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.3rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #dc2626;
+  line-height: 1.4;
+
+  .error-icon {
+    flex-shrink: 0;
+    width: 13px;
+    height: 13px;
+    color: #dc2626;
+  }
+}

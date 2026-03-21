@@ -1,0 +1,40 @@
+<div class="login-wrapper">
+  <!-- Left branding panel -->
+  <div class="branding-panel">
+    <div class="branding-content">
+      <div class="brand-logo">TAB</div>
+      <h1 class="brand-tagline">Almost there</h1>
+      <p class="brand-sub">Fill in your profile details so we can personalise your experience.</p>
+    </div>
+    <div class="branding-circles">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="form-panel">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Your details</h2>
+        <p>Tell us a bit about yourself</p>
+      </div>
+
+      <form [formGroup]="detailsForm" (ngSubmit)="onSaveDetails()">
+
+        <div class="form-section-label">Personal</div>
+          <app-text-input [formGroup]="detailsForm" [control]="'firstName'" [label]="'First Name(s)'" />
+          <app-text-input [formGroup]="detailsForm" [control]="'lastName'" [label]="'Last Name'" />
+
+        <div class="form-section-label">Contact</div>
+        <app-text-input [formGroup]="detailsForm" [control]="'phoneNumber'" [label]="'Phone Number'" />
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary action-btn">Back</button>
+          <button type="submit" class="btn btn-primary action-btn" [disabled]="isLoading()">Next</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

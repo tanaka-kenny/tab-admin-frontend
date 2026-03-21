@@ -65,7 +65,8 @@
               "buildTarget": "admin-frontend:build:production"
             },
             "development": {
-              "buildTarget": "admin-frontend:build:development"
+              "buildTarget": "admin-frontend:build:development",
+              "proxyConfig": "src/proxy-conf.json"
             }
           },
           "defaultConfiguration": "development"

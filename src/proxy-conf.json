@@ -1,0 +1,8 @@
+{
+  "/registration-service": {
+    "target": "http://localhost:8481",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

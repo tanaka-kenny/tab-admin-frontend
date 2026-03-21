@@ -1,0 +1,37 @@
+<div class="login-wrapper">
+  <!-- Left branding panel -->
+  <div class="branding-panel">
+    <div class="branding-content">
+      <div class="brand-logo">TAB</div>
+      <h1 class="brand-tagline">Reset your password</h1>
+      <p class="brand-sub">We'll send a link to your email so you can get back in quickly.</p>
+    </div>
+    <div class="branding-circles">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="form-panel">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Forgot your password?</h2>
+        <p>Enter your email and we'll send you a reset link</p>
+      </div>
+
+      <form [formGroup]="credentialsForm">
+        <app-text-input [formGroup]="credentialsForm" [control]="'email'" [label]="'Email'" />
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary action-btn" [routerLink]="'/auth'">Cancel</button>
+          <button type="submit" class="btn btn-primary action-btn">Send link</button>
+        </div>
+      </form>
+
+      <p class="back-link">
+        <a [routerLink]="'/auth'">&#8592; Back to sign in</a>
+      </p>
+    </div>
+  </div>
+</div>

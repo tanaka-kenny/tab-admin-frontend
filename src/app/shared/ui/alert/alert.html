@@ -1,0 +1,23 @@
+@if (alert(); as currentAlert) {
+  <div
+    class="alert-toast"
+    [class]="'alert-toast alert-toast--' + currentAlert.alertType"
+    role="alert"
+    aria-live="polite"
+  >
+    <span class="alert-toast__icon">
+      <fa-icon [icon]="currentAlert.fontIcon!" />
+    </span>
+    <span class="alert-toast__message">{{ currentAlert.message }}</span>
+    <button
+      class="alert-toast__dismiss"
+      type="button"
+      aria-label="Dismiss"
+      (click)="dismiss()"
+    >
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="14" height="14">
+        <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+}
