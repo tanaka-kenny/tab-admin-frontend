@@ -1,0 +1,52 @@
+@import '../../../styles/variables.scss';
+
+.prompt-tenant {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+
+  &__card {
+    max-width: 480px;
+    width: 100%;
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 6%);
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: #1a202c;
+  }
+
+  &__description {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  &__cta {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    background: $primary-color;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      outline: 2px solid $primary-color;
+      outline-offset: 3px;
+    }
+  }
+}

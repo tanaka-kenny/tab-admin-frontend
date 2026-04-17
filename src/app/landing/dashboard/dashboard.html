@@ -1,0 +1,20 @@
+@switch (currentUiView()) {
+  @case ('dashboard') {}
+  @case ('prompt_tenant_creation') {
+    <div class="prompt-tenant">
+      <div class="prompt-tenant__card">
+        <h1 class="prompt-tenant__title">Set up your tenant</h1>
+        <p class="prompt-tenant__description">
+          Create a tenant to unlock the full features of this platform, including
+          event management, billing, waiters, and more.
+        </p>
+        <a
+          class="prompt-tenant__cta"
+          routerLink="/landing/tenants"
+        >
+          Create a Tenant
+        </a>
+      </div>
+    </div>
+  }
+}

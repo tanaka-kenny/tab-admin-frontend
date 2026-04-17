@@ -1,0 +1,23 @@
+<nav class="sidenav" aria-label="Main navigation">
+  <!-- Brand -->
+  <div class="sidenav__brand">
+    <span class="sidenav__logo">TAB</span>
+  </div>
+
+  <!-- Nav items -->
+  <ul class="sidenav__nav">
+    @for (item of navItems; track $index) {
+      <li>
+        <a
+          class="sidenav__item"
+          [routerLink]="'/landing/' + item.path"
+          routerLinkActive="sidenav__item--active"
+          ariaCurrentWhenActive="page"
+        >
+          <fa-icon class="sidenav__icon" [icon]="item.icon" />
+          <span class="sidenav__label">{{ item.name }}</span>
+        </a>
+      </li>
+    }
+  </ul>
+</nav>

@@ -1,0 +1,149 @@
+@import '../../../styles.scss';
+
+.page {
+  padding: 2rem 2.5rem;
+  max-width: 800px;
+
+  // ── Header ──────────────────────────────────────────────────────
+  .page-header {
+    margin-bottom: 1.75rem;
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748b;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: $primary_color;
+      }
+    }
+
+    &__text {
+      h1 {
+        font-size: 1.65rem;
+        font-weight: 700;
+        color: #0a2540;
+        margin: 0 0 0.2rem;
+      }
+
+      p {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin: 0;
+      }
+    }
+  }
+
+  // ── Form card ───────────────────────────────────────────────────
+  .form-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 2rem;
+  }
+
+  // ── Sections ────────────────────────────────────────────────────
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+
+    &:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    &__label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // ── Two-column grid ─────────────────────────────────────────────
+  .form-row-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.25rem;
+
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ── Textarea override ───────────────────────────────────────────
+  .field-group {
+    margin-bottom: 1rem;
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+
+  // ── Actions ─────────────────────────────────────────────────────
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .btn-cancel {
+    padding: 0.55rem 1.25rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: $commissioner_font;
+    color: #64748b;
+    background: transparent;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      border-color: #94a3b8;
+      color: #374151;
+    }
+  }
+
+  .btn-save {
+    padding: 0.55rem 1.5rem;
+    background: $primary_color;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: $commissioner_font;
+    cursor: pointer;
+    transition: opacity 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+      box-shadow: 0 4px 12px rgba(18, 55, 83, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}

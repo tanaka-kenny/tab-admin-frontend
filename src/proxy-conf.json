@@ -4,5 +4,11 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+  "/events-service": {
+    "target": "http://localhost:8281",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

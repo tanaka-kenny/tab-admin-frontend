@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AuthService } from './auth/data-access/services/auth-service';
 import { ProfileService } from './profile/data-access/services/profile-service';
 
 export const routes: Routes = [
@@ -16,6 +15,10 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadChildren: async () => (await import('./auth/auth.routes')).routes,
-    providers: [AuthService]
+  },
+  {
+    path: 'landing',
+    loadChildren: async () => (await import('./landing/landing.routes')).routes,
+    providers: [ProfileService]
   }
 ];
