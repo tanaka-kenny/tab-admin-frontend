@@ -1,0 +1,52 @@
+<div class="page px-5">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="page-header__text">
+      <h1>Tenant</h1>
+      <p>Overview of all your tenant</p>
+    </div>
+    @if (tenants().length === 0) {
+      <a class="cta-btn" routerLink="add">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M8 2V14M2 8H14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+        Create Tenant
+      </a>
+    }
+  </div>
+
+  <!-- Tenant list -->
+  @if (tenants().length > 0) {
+    <ul class="tenants-grid" aria-label="Tenants">
+      @for (tenant of tenants(); track tenant.id) {
+        <li class="tenant-card">
+          <div class="tenant-card__header">
+            <span class="tenant-card__name">{{ tenant.name }}</span>
+            <span
+              [class]="
+                'status-badge status-badge--' + tenant.status.toLowerCase()
+              "
+            >
+              {{ tenant.status }}
+            </span>
+          </div>
+          <p class="tenant-card__created">
+            Created {{ tenant.createdAt | date: "mediumDate" }}
+          </p>
+        </li>
+      }
+    </ul>
+  }
+</div>

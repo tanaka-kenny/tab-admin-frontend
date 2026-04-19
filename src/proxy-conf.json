@@ -10,5 +10,11 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+    "/identity-and-tenant-service": {
+    "target": "http://localhost:8681",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

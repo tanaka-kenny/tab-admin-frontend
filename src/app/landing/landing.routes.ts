@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import { LandingComponent } from './landing.component';
 import { EventsService } from './data-access/services/events-service';
+import { TenantService } from './tenants/tenant.service';
 
 export const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
     providers: [
-      EventsService
-    ],
+      EventsService],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
@@ -34,6 +34,11 @@ export const routes: Routes = [
       {
         path: 'waiters',
         loadComponent: () => import('./waiters/waiters').then(m => m.Waiters),
+      },
+      {
+        path: 'tenants',
+        loadChildren: () => import('./tenants/tenant.routes').then(m => m.routes),
+        providers: [TenantService]
       },
     ],
   },

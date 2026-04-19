@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   registrationService: '/registration-service',
   eventsService: '/events-service',
+  tenantService: '/identity-and-tenant-service',
   firebase: { 
     projectId: 'pacifish-tab', 
     appId: '1:701405795946:web:5aaddd7c6edb162585dc13', 

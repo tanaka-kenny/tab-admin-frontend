@@ -1,0 +1,56 @@
+<div class="page px-5 col-lg-6 col-md-8">
+  <!-- Header -->
+  <div class="page-header">
+    <a class="back-link" routerLink="/landing/events">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M19 12H5M5 12L11 18M5 12L11 6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      Back to Tenants
+    </a>
+    <div class="page-header__text">
+      <h1>New Tenant</h1>
+      <p>Fill in the details below to create a new tenant</p>
+    </div>
+  </div>
+
+  <!-- Form card -->
+  <div class="form-card">
+    <form [formGroup]="form" (ngSubmit)="onSaveTenant()" novalidate>
+      <!-- Basic info -->
+      <div class="form-section">
+        <span class="form-section__label">BASIC INFO</span>
+        <app-text-input
+          [formGroup]="form"
+          control="name"
+          label="Tenant name"
+          placeholder="e.g. Acme Corporation"
+        />
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <a class="btn-cancel" routerLink="/landing/tenants">Cancel</a>
+          <button type="submit" class="btn-save" [disabled]="saving()">
+            @if (saving()) {
+              Saving…
+            } @else {
+              Save Tenant
+            }
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

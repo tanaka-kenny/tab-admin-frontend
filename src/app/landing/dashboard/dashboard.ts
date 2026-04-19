@@ -16,13 +16,13 @@ export class Dashboard implements OnInit {
   readonly #authService = inject(AuthService);
   readonly #destroyRef = inject(DestroyRef);
 
-  currentUiView = signal<UiView | null>('prompt_tenant_creation');
+  currentUiView = signal<UiView | null>(null);
 
   ngOnInit(): void {
-    this.#checkForTenatId();
+    this.#checkForTenantId();
   }
 
-  #checkForTenatId() {
+  #checkForTenantId() {
     this.#authService.currentUser$.pipe(
       takeUntilDestroyed(this.#destroyRef)
     ).subscribe({
