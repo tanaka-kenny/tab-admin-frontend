@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import './styles/variables.scss';
+@import "./styles/variables.scss";
 
 @font-face {
   font-family: "Commissioner";
@@ -67,4 +67,74 @@ h2 {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+// header on every page
+.page {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  // ── Header ────────────────────────────────────────────
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #e2e8f0;
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748b;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: $primary_color;
+      }
+    }
+
+    &__text {
+      h1 {
+        font-size: 1.65rem;
+        font-weight: 700;
+        color: #0a2540;
+        margin: 0 0 0.2rem;
+      }
+
+      p {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin: 0;
+      }
+    }
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.1rem;
+    background: $primary_color;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: $commissioner_font;
+    text-decoration: none;
+    transition:
+      opacity 0.15s ease,
+      box-shadow 0.15s ease;
+    flex-shrink: 0;
+
+    &:hover {
+      opacity: 0.9;
+      box-shadow: 0 4px 12px rgba(18, 55, 83, 0.3);
+    }
+  }
 }
