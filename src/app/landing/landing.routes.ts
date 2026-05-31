@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { LandingComponent } from './landing.component';
 import { EventsService } from './data-access/services/events-service';
-import { TenantService } from './tenants/tenant.service';
+import { TenantService } from './tenants/services/tenant.service';
+import { TenantUserService } from './tenants/services/tenant-user.service';
 
 export const routes: Routes = [
   {
@@ -38,7 +39,7 @@ export const routes: Routes = [
       {
         path: 'tenants',
         loadChildren: () => import('./tenants/tenant.routes').then(m => m.routes),
-        providers: [TenantService]
+        providers: [TenantService, TenantUserService]
       },
     ],
   },

@@ -12,7 +12,8 @@ export class SelectInput {
   formGroup = input.required<FormGroup>()
   control = input.required<string>()
   label = input.required<string>()
-  options = input.required<{ key: string; value: any }[]>()
+  options = input.required<{ key: any; value: any }[]>()
+  hint = input<string>()
 
   isRequired() {
     return this.formGroup().get(this.control())?.hasValidator(Validators.required)

@@ -5,48 +5,113 @@
       <h1>Tenant</h1>
       <p>Overview of all your tenant</p>
     </div>
-    @if (tenants().length === 0) {
+    @let tenant = tenantSignal();
+    @if (!tenant) {
       <a class="cta-btn" routerLink="add">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M8 2V14M2 8H14"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
+        <fa-icon [icon]="faPlus" />
         Create Tenant
+      </a>
+    } @else {
+      <a class="cta-btn" routerLink="edit">
+        <fa-icon [icon]="faPencil" />
+        Edit Tenant
       </a>
     }
   </div>
 
   <!-- Tenant list -->
-  @if (tenants().length > 0) {
+  @if (tenant) {
     <ul class="tenants-grid" aria-label="Tenants">
-      @for (tenant of tenants(); track tenant.id) {
-        <li class="tenant-card">
-          <div class="tenant-card__header">
-            <span class="tenant-card__name">{{ tenant.name }}</span>
-            <span
-              [class]="
-                'status-badge status-badge--' + tenant.status.toLowerCase()
-              "
-            >
-              {{ tenant.status }}
-            </span>
-          </div>
-          <p class="tenant-card__created">
-            Created {{ tenant.createdAt | date: "mediumDate" }}
-          </p>
-        </li>
-      }
+      <li class="tenant-card">
+        <div class="tenant-card__header">
+          <span class="tenant-card__name">{{ tenant.name }}</span>
+          <span
+            [class]="
+              'status-badge status-badge--' + tenant.status.toLowerCase()
+            "
+          >
+            {{ tenant.status }}
+          </span>
+        </div>
+        <p class="tenant-card__created">
+          Created {{ tenant.createdAt | date: "mediumDate" }}
+        </p>
+      </li>
     </ul>
+
+    <!-- Tenant Users -->
+    <section class="users-section" aria-labelledby="users-heading">
+      <div class="users-section__header">
+        <h2 id="users-heading">Team Members</h2>
+        <a class="cta-btn" routerLink="users/add">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M8 2V14M2 8H14"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          Add User
+        </a>
+      </div>
+
+      @if (tenantUsers().length > 0) {
+        <section class="table-wrapper" aria-labelledby="users-heading">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of tenantUsers(); track user.id) {
+                <tr>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>
+                    <span
+                      [class]="
+                        'role-badge role-badge--' + user.role.toLowerCase()
+                      "
+                    >
+                      {{ user.role }}
+                    </span>
+                  </td>
+                  <td class="actions-cell">
+                    <a
+                      [routerLink]="['users', user.id, 'edit']"
+                      class="action-btn action-btn--edit"
+                    >
+                      Edit
+                    </a>
+                    <button
+                      type="button"
+                      class="action-btn action-btn--delete"
+                      (click)="onDeleteUser(user.id)"
+                      [attr.aria-label]="'Delete ' + user.name"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+      } @else {
+        <p class="users-empty">No team members yet. Add one to get started.</p>
+      }
+    </section>
   }
 </div>

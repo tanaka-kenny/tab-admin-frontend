@@ -14,6 +14,7 @@ export class TextInput {
   label = input.required<string>()
   type = input('text')
   placeholder = input('')
+   hint = input<string>()
 
   isRequired() {
     return this.formGroup().get(this.control())?.hasValidator(Validators.required)

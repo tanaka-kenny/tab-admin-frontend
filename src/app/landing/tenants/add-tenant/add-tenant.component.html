@@ -28,29 +28,280 @@
 
   <!-- Form card -->
   <div class="form-card">
-    <form [formGroup]="form" (ngSubmit)="onSaveTenant()" novalidate>
-      <!-- Basic info -->
-      <div class="form-section">
-        <span class="form-section__label">BASIC INFO</span>
-        <app-text-input
-          [formGroup]="form"
-          control="name"
-          label="Tenant name"
-          placeholder="e.g. Acme Corporation"
-        />
+    @switch (currentStep()) {
+      @case ("basic_info") {
+        <form [formGroup]="form">
+          <!-- Basic info -->
+          <div class="form-section">
+            <span class="form-section__label">BASIC INFO</span>
+            <app-text-input
+              [formGroup]="form"
+              control="name"
+              label="Tenant name"
+              placeholder="e.g. Acme Corporation"
+            />
+          </div>
+          <!-- Actions -->
+          <div class="form-actions">
+            <a class="btn-cancel" routerLink="/landing/tenants">Cancel</a>
+            <button 
+            (click)="currentStep.set('settings_preference')" class="btn-save" [disabled]="form.invalid">
+              Next
+            </button>
+          </div>
+        </form>
+      }
 
-        <!-- Actions -->
-        <div class="form-actions">
-          <a class="btn-cancel" routerLink="/landing/tenants">Cancel</a>
-          <button type="submit" class="btn-save" [disabled]="saving()">
-            @if (saving()) {
-              Saving…
-            } @else {
-              Save Tenant
-            }
-          </button>
+      @case ("settings_preference") {
+        <div class="form-section settings-preference">
+          <span class="form-section__label">TENANT SETUP</span>
+          <div class="settings-preference__body">
+            <div class="settings-preference__icon" aria-hidden="true">
+              <fa-icon [icon]="faQuestion" />
+            </div>
+            <h2 class="settings-preference__title">Use default settings?</h2>
+            <p class="settings-preference__desc">
+              We have sensible defaults ready to go — currency, tipping, tax,
+              waiting times and more. You can always customise these later from
+              the tenant settings.
+            </p>
+
+            <!-- Default settings summary -->
+            <div class="defaults-summary">
+              <div class="defaults-summary__group">
+                <span class="defaults-summary__group-label">Financial</span>
+                <ul class="defaults-summary__list">
+                  <li>
+                    <span>Currency</span
+                    ><strong>{{ defaultSettings.financial.currency }}</strong>
+                  </li>
+                  <li>
+                    <span>Default tip</span
+                    ><strong
+                      >{{
+                        defaultSettings.financial.defaultTipPercent
+                      }}%</strong
+                    >
+                  </li>
+                  <li>
+                    <span>Tax rate</span
+                    ><strong
+                      >{{ defaultSettings.financial.taxPercent }}%</strong
+                    >
+                  </li>
+                  <li>
+                    <span>Prices include tax</span
+                    ><strong>{{
+                      defaultSettings.financial.pricesIncludeTax ? "Yes" : "No"
+                    }}</strong>
+                  </li>
+                </ul>
+              </div>
+              <div class="defaults-summary__group">
+                <span class="defaults-summary__group-label">Customer</span>
+                <ul class="defaults-summary__list">
+                  <li>
+                    <span>Warning threshold</span
+                    ><strong
+                      >{{
+                        defaultSettings.customer.waitingTimeWarningMinutes
+                      }}
+                      min</strong
+                    >
+                  </li>
+                  <li>
+                    <span>Critical threshold</span
+                    ><strong
+                      >{{
+                        defaultSettings.customer.waitingTimeCriticalMinutes
+                      }}
+                      min</strong
+                    >
+                  </li>
+                  <li>
+                    <span>Close with unpaid tabs</span
+                    ><strong>{{
+                      defaultSettings.customer.allowCloseWithUnpaidTabs
+                        ? "Allowed"
+                        : "Not allowed"
+                    }}</strong>
+                  </li>
+                  <li>
+                    <span>QR session timeout</span
+                    ><strong
+                      >{{
+                        defaultSettings.customer.qrSessionTimeoutHours
+                      }}h</strong
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="defaults-summary__group">
+                <span class="defaults-summary__group-label"
+                  >Payment methods</span
+                >
+                <ul class="defaults-summary__list">
+                  @for (
+                    method of defaultSettings.payment.enabledMethods;
+                    track method
+                  ) {
+                    <li>
+                      <strong>{{ method }}</strong>
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+            <div class="settings-preference__actions">
+              <button
+                type="button"
+                class="btn-outline"
+                [disabled]="saving()"
+                (click)="
+                  form.controls.useDefaultSettings.setValue(false);
+                  currentStep.set('tenant_settings')
+                "
+              >
+                No, I'll configure manually
+              </button>
+              <button
+                type="button"
+                class="btn-primary"
+                (click)="onSaveWithDefaultConfiguration()"
+                [disabled]="saving()"
+              >
+               @if (saving()) {
+                  Saving…
+                } @else {
+                  Yes, use default settings
+               }
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
+      }
+
+      @case ("tenant_settings") {
+        <form (ngSubmit)="onSaveTenant()">
+          <!-- Financial Settings -->
+          <div class="form-section">
+            <span class="form-section__label">Financial Settings</span>
+            <app-select-input
+              [formGroup]="financialSettingsForm"
+              control="currency"
+              label="Currency"
+              [options]="currencyOptions"
+              [hint]="
+                'The standard currency code used across your menus, reports, and receipts'
+              "
+            />
+            <app-text-input
+              [formGroup]="financialSettingsForm"
+              control="defaultTipPercent"
+              label="Default tip %"
+              type="number"
+              placeholder="e.g. 10"
+              [hint]="
+                'The automatic gratuity percentage added to a visitor\'s tab total at checkout'
+              "
+            />
+
+            <app-text-input
+              [formGroup]="financialSettingsForm"
+              control="taxPercent"
+              label="Tax rate %"
+              type="number"
+              placeholder="e.g. 15"
+              [hint]="
+                'The local sales tax or VAT rate applied to menu items during billing.'
+              "
+            />
+            <app-select-input
+              [formGroup]="financialSettingsForm"
+              control="pricesIncludeTax"
+              label="Prices include tax"
+              [options]="yesNoOptions"
+              [hint]="
+                'Turn this on if your menu prices already have tax factored in. Turn off to add tax at final checkout.'
+              "
+            />
+          </div>
+
+          <!-- Customer Settings -->
+          <div class="form-section">
+            <span class="form-section__label">Customer Settings</span>
+            <app-select-input
+              [formGroup]="customerSettingsForm"
+              control="waitingTimeWarningMinutes"
+              label="Waiting time warning"
+              [options]="waitingTimeWarningOptions"
+              [hint]="
+                'Minutes a customer alert can stay unanswered before turning amber on the Waiter Portal.'
+              "
+            />
+            <app-select-input
+              [formGroup]="customerSettingsForm"
+              control="waitingTimeCriticalMinutes"
+              label="Waiting time critical"
+              [options]="waitingTimeCriticalOptions"
+              [hint]="
+                'Minutes a customer alert can stay unanswered before flashing red to signal urgent attention.'
+              "
+            />
+            <app-select-input
+              [formGroup]="customerSettingsForm"
+              control="qrSessionTimeoutHours"
+              label="QR session timeout (hours)"
+              [options]="qrSessionTimeoutOptions"
+              [hint]="
+                'How long a visitor stays linked to an event table after scanning the QR code before being auto-logged out.'
+              "
+            />
+            <app-select-input
+              [formGroup]="customerSettingsForm"
+              control="allowCloseWithUnpaidTabs"
+              label="Allow close with unpaid tabs"
+              [options]="yesNoOptions"
+              [hint]="
+                'If disabled, waiters cannot close out or archive an active event if there are outstanding customer balances.'
+              "
+            />
+          </div>
+
+          <!-- Payment Settings -->
+          <div class="form-section">
+            <span class="form-section__label">Payment Settings</span>
+            <app-select-input
+              [formGroup]="paymentSettingsForm"
+              control="enabledMethods"
+              label="Enabled payment methods"
+              [options]="paymentMethodOptions"
+              [hint]="
+                'Choose the payment options available to your customers at checkout '
+              "
+            />
+          </div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn-cancel"
+              [disabled]="saving()"
+              (click)="currentStep.set('settings_preference')"
+            >
+              Back
+            </button>
+            <button type="submit" class="btn-save" [disabled]="saving()">
+              @if (saving()) {
+                Saving…
+              } @else {
+                Save Tenant
+              }
+            </button>
+          </div>
+        </form>
+      }
+    }
   </div>
 </div>

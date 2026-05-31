@@ -12,4 +12,7 @@
     }
   </select>
   <app-input-errors [control]="formGroup().controls[control()]" />
+  @if (hint()) {
+    <small class="form-text text-muted">{{ hint() }}</small>
+  }
 </div>

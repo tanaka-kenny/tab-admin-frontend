@@ -1,10 +1,18 @@
-<div class="mb-3" [formGroup]="formGroup()" >
+<div class="mb-3" [formGroup]="formGroup()">
   <label class="form-label">
     {{ label() }}
-    @if(isRequired()) {
-    <span>*</span>
+    @if (isRequired()) {
+      <span>*</span>
     }
   </label>
-  <input [formControlName]="control()" [type]="type()" [placeholder]="placeholder()" class="form-control" />
+  <input
+    [formControlName]="control()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    class="form-control"
+  />
   <app-input-errors [control]="formGroup().controls[control()]" />
+  @if (hint()) {
+    <small class="form-text text-muted">{{ hint() }}</small>
+  }
 </div>
