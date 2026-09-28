@@ -26,7 +26,7 @@ export class TenantsComponent implements OnInit {
   readonly #alertService = inject(AlertService);
   readonly #destroyRef = inject(DestroyRef);
 
-  tenantId$ = this.#tenantService.tenantId;
+  tenantId$ = this.#tenantService.tenantId$;
   tenantSignal = signal<Tenant | null>(null);
   tenantUsers = signal<TenantUser[]>([]);
 

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TextInput } from '../../shared/ui/text-input/text-input';
-import { ProfileService } from '../data-access/services/profile-service';
+import { FirebaseRegisterService } from '../data-access/services/firebase-register.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +12,7 @@ import { ProfileService } from '../data-access/services/profile-service';
 })
 export class SignUp {
   readonly #formBuilder = inject(FormBuilder);
-  readonly #profileService = inject(ProfileService);
+  readonly #profileService = inject(FirebaseRegisterService);
 
   credentialsForm = this.#formBuilder.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],

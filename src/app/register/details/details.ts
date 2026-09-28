@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextInput } from '../../shared/ui/text-input/text-input';
 import { SelectOption } from '../../shared/data-access/models/select-option.model';
-import { ProfileService } from '../data-access/services/profile-service';
 import { AlertService } from '../../shared/data-access/services/alert-service';
 import { MessageType } from '../../shared/data-access/models/alert.model';
 import { Router } from '@angular/router';
+import { RegisterService } from '../data-access/services/register-service';
+import { AuthService } from '../../auth/data-access/services/auth-service';
 
 @Component({
   selector: 'app-details',
@@ -16,9 +17,10 @@ import { Router } from '@angular/router';
 export class Details {
 
   readonly #formBuilder = inject(FormBuilder);
-  readonly #profileService = inject(ProfileService);
+  readonly #registerService = inject(RegisterService);
   readonly #alertService = inject(AlertService);
   readonly #router = inject(Router);
+  readonly #authService = inject(AuthService);
 
   isLoading = signal(false);
 
@@ -40,10 +42,14 @@ export class Details {
 
     this.isLoading.set(true);
 
-    this.#profileService.createCustomerProfile(this.detailsForm.getRawValue()).subscribe({
-      next: () => {
+    this.#registerService.createCustomerProfile(this.detailsForm.getRawValue()).subscribe({
+      next: async () => {
         this.isLoading.set(false);
         this.#alertService.addAlert(MessageType.SUCCESS, 'Profile created successfully.');
+
+        await this.#authService.refreshToken();
+
+        this.#router.navigate(['/landing'])
       },
       error: (err) => {
         this.isLoading.set(false);

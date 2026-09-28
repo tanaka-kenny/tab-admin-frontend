@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
-import { ProfileService } from './profile/data-access/services/profile-service';
+import { FirebaseRegisterService } from './register/data-access/services/firebase-register.service';
+import { RegisterService } from './register/data-access/services/register-service';
+import { completeProfileGuard, inCompleteProfileGuard } from './shared/data-access/guards/register-status-guard';
 
 export const routes: Routes = [
   {
@@ -9,8 +11,8 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: async () => (await import('./profile/profile.routes')).routes,
-    providers: [ProfileService]
+    loadChildren: async () => (await import('./register/register.routes')).routes,
+    providers: [FirebaseRegisterService, RegisterService]
   },
   {
     path: 'auth',
@@ -19,6 +21,7 @@ export const routes: Routes = [
   {
     path: 'landing',
     loadChildren: async () => (await import('./landing/landing.routes')).routes,
-    providers: [ProfileService]
+    providers: [FirebaseRegisterService, RegisterService],
+    canMatch: [inCompleteProfileGuard]
   }
 ];

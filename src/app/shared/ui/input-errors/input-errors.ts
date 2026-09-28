@@ -27,6 +27,9 @@ export class InputErrors {
         case 'pattern':
           message = 'The input format is invalid.';
           break;
+        case 'minlength':
+          message = 'This field is too short.';
+          break;
         default:
           message = 'Invalid input.';
       }

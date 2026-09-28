@@ -4,9 +4,13 @@ import { TextInput } from '../../../shared/ui/text-input/text-input';
 import { TenantService } from '../services/tenant.service';
 import { AlertService } from '../../../shared/data-access/services/alert-service';
 import { MessageType } from '../../../shared/data-access/models/alert.model';
+<<<<<<< Updated upstream
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/data-access/services/auth-service';
 import { switchMap } from 'rxjs';
+=======
+import { Router, RouterLink } from '@angular/router';
+>>>>>>> Stashed changes
 import { SelectInput } from '../../../shared/ui/select-input/select-input';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
@@ -26,9 +30,28 @@ export class AddTenantComponent {
   readonly #formBuilder = inject(FormBuilder);
   readonly #tenantService = inject(TenantService);
   readonly #alertService = inject(AlertService);
-  readonly #authService = inject(AuthService);
   readonly #router = inject(Router);
 
+<<<<<<< Updated upstream
+=======
+  #tenantId?: string;
+
+  @Input() set id(value: string) {
+
+    if (value) {
+      this.#tenantId = value;
+      this.#tenantService.getTenant().subscribe(tenant => {
+        this.form.patchValue({ name: tenant.name });
+        if (tenant.settings) {
+          this.financialSettingsForm.patchValue(tenant.settings.financialSettings);
+          this.customerSettingsForm.patchValue(tenant.settings.customerSettings);
+          this.paymentSettingsForm.patchValue({ enabledMethods: tenant.settings.paymentSettings.enabledMethods[0] });
+        }
+      });
+    }
+  }
+
+>>>>>>> Stashed changes
   saving = signal(false);
   currentStep = signal<CurrentStep>('basic_info');
 
@@ -104,10 +127,15 @@ export class AddTenantComponent {
     }
 
     this.saving.set(true);
+<<<<<<< Updated upstream
     this.#tenantService.createTenant(this.form.getRawValue().useDefaultSettings, payload)
       .pipe(
         switchMap(() => this.#authService.refreshToken())
       )
+=======
+
+    action$
+>>>>>>> Stashed changes
       .subscribe({
         next: () => {
           this.#alertService.addAlert(MessageType.SUCCESS, 'Tenant saved successfully');

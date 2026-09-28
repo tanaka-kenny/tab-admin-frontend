@@ -1,0 +1,92 @@
+<div class="invite-wrapper">
+  <!-- Left branding panel -->
+  <div class="branding-panel">
+    <div class="branding-content">
+      <div class="brand-logo">TAB</div>
+      <h1 class="brand-tagline">You're invited</h1>
+      <p class="brand-sub">Accept your invitation and start managing everything in one place.</p>
+    </div>
+    <div class="branding-circles">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+    </div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="form-panel">
+    <div class="form-container">
+      @switch (uiView()) {
+
+        @case ('verifying') {
+          <div class="state-block">
+            <output class="spinner" aria-label="Validating invitation"></output>
+            <h2>Validating your invitation</h2>
+            <p>Hold on while we verify your invite link.</p>
+          </div>
+        }
+
+        @case ('invalid') {
+          <div class="state-block">
+            <h2>Invitation unavailable</h2>
+            <p>This invitation link is invalid or has expired. Please ask your administrator to send a new one.</p>
+            <a class="btn btn-primary state-btn" [routerLink]="'/auth'">Go to sign in</a>
+          </div>
+        }
+
+        @case ('create_account') {
+          <div class="form-header">
+            <h2>Join {{ invitation()?.tenantName }}</h2>
+            <p>
+              You've been invited as <strong>{{ invitation()?.role }}</strong>.
+              Set a password to finish creating your account.
+            </p>
+          </div>
+
+          <form [formGroup]="credentialsForm" (ngSubmit)="createAccount()">
+            <app-text-input
+              [formGroup]="credentialsForm"
+              [control]="'firstName'"
+              [label]="'First Name'"
+              [placeholder]="'Palesa'"
+            />
+            <app-text-input
+              [formGroup]="credentialsForm"
+              [control]="'lastName'"
+              [label]="'Last Name'"
+              [placeholder]="'Mokone'"
+            />
+            <app-text-input
+              [formGroup]="credentialsForm"
+              [control]="'phoneNumber'"
+              [label]="'Mobile Number'"
+              [placeholder]="'082 123 4567'"
+            />
+            <app-text-input
+              [formGroup]="credentialsForm"
+              [control]="'email'"
+              [label]="'Email'"
+            />
+            <app-text-input
+              [formGroup]="credentialsForm"
+              [control]="'password'"
+              [label]="'Password'"
+              [type]="'password'"
+              [hint]="'Minimum 8 characters'"
+            />
+            <button
+              type="submit"
+              class="btn btn-primary submit-btn"
+              [disabled]="isSubmitting()"
+            >
+              {{ isSubmitting() ? 'Creating account…' : 'Create account' }}
+            </button>
+          </form>
+
+          <p class="signin-prompt">
+            Already have an account? <a [routerLink]="'/auth'">Sign in</a>
+          </p>
+        }
+      }
+    </div>
+  </div>
+</div>

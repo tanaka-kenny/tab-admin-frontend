@@ -3,7 +3,7 @@ import { Auth, authState, GoogleAuthProvider, signInWithEmailAndPassword, signIn
 import { AlertService } from "../../../shared/data-access/services/alert-service";
 import { MessageType } from "../../../shared/data-access/models/alert.model";
 import { Router } from "@angular/router";
-import { from } from "rxjs";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,9 +51,8 @@ export class AuthService {
   }
 
   refreshToken() {
-    return from(
-      this.#auth.currentUser?.getIdToken(true) || Promise.resolve(null)
-    );
+    return this.#auth.currentUser?.getIdToken(true) || Promise.resolve(null)
+
   }
 
   logout() {

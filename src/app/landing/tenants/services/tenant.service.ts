@@ -14,7 +14,7 @@ export class TenantService {
   readonly #baseUrl = environment.tenantService + '/tenants';
 
   readonly #tenantId = new BehaviorSubject<string | null>(null);
-  readonly tenantId = this.#tenantId.asObservable();
+  readonly tenantId$ = this.#tenantId.asObservable();
 
   constructor() {
     this.#authService.currentUser$.subscribe({
@@ -27,7 +27,12 @@ export class TenantService {
   }
 
   public getTenant(): Observable<Tenant> {
+<<<<<<< Updated upstream
     return this.tenantId.pipe(
+=======
+    return this.tenantId$.pipe(
+      filter(id => !!id),
+>>>>>>> Stashed changes
       switchMap(id => {
         if (!id) throw new Error('No tenant ID found for current user');
 

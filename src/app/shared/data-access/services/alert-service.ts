@@ -19,7 +19,7 @@ export class AlertService {
 
     const alert: Alert = { type, message, };
 
-    this.#alert.set(this.configureAlert(alert));
+    this.#alert.set(this.#configureAlert(alert));
     this.#dismissTimer = setTimeout(() => this.clearAlert(), durationMs);
   }
 
@@ -31,7 +31,7 @@ export class AlertService {
     this.#alert.set(null);
   }
 
-  configureAlert(alert: Alert) {
+  #configureAlert(alert: Alert) {
     switch (alert.type) {
       case MessageType.SUCCESS:
         alert.fontIcon = faCheck;
